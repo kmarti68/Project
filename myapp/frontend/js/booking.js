@@ -7,10 +7,20 @@
 async function populateRoomSelect() {
   const select = document.getElementById("room-select");
 
+
   // TODO:
   // 1. Call getRooms() from api.js
   // 2. For each room, create an <option value="ROOM_ID">ROOM_NAME</option>
   // 3. Append the options to `select`
+
+const rooms = await getRooms();
+rooms.forEach((room) => {
+  const option = document.createElement("option");
+  option.value = room.id;
+  option.textContent = room.name;
+  select.appendChild(option);
+});
+
 }
 
 function handleBookingSubmit(event) {
