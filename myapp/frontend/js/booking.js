@@ -23,7 +23,7 @@ rooms.forEach((room) => {
 
 }
 
-function handleBookingSubmit(event) {
+async function handleBookingSubmit(event) {
   event.preventDefault();
 
   const statusEl = document.getElementById("form-status");
@@ -37,8 +37,32 @@ function handleBookingSubmit(event) {
   //    and consider resetting the form with event.target.reset()
   // 5. On failure, show an error message in statusEl (add class "error")
 
-  statusEl.textContent = "TODO: implement handleBookingSubmit()";
+const bookingData = {
+  roomId: document.getElementById("room-select").value,
+  clubName: document.getElementById("club-name").value,
+  date: document.getElementById("date").value,
+  startTime: document.getElementById("start-time").value,
+  endTime: document.getElementById("end-time").value,
+  purpose: document.getElementById("purpose").value,
+};
+
+console.log("Booking data:", bookingData);
+
+  statusEl.textContent = "TODO: implement handleBookingSubmit()  - already done";
+
+try {
+  const newBooking = await createBooking(bookingData);
+  statusEl.textContent = "Booking created successfully!";
+  statusEl.classList.add("success");
+  statusEl.classList.remove("error");
+  event.target.reset();
+} catch (error) {
+  console.error("Error creating booking:", error);
+  statusEl.textContent = "Error creating booking. Please try again.";
+  statusEl.classList.add("error");
+  statusEl.classList.remove("success");
 }
+  }
 
 document.addEventListener("DOMContentLoaded", () => {
   populateRoomSelect();
