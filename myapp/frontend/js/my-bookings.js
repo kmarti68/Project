@@ -24,7 +24,7 @@ if (bookings.length === 0) {
 }
 
 const bookingItems = bookings.map(async (booking) => {
-  const room = await getRoomById(booking.roomId);
+const room = await getRoomById(booking.roomId);
   return `
     <div class="booking-item">
       <h3>${room.name} </h3>
