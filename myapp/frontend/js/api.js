@@ -15,30 +15,30 @@
 //   Examples are shown in the comments below each function.
 
 // ---------- Mock data used only in Stage 1 ----------
-const MOCK_ROOMS = [
-  {
-    id: "r1",
-    name: "Bayou City Room",
-    capacity: 12,
-    equipment: ["Projector", "Whiteboard", "Conference Phone"],
-    foodAllowed: true,
-  },
-  {
-    id: "r2",
-    name: "Cullen Room",
-    capacity: 8,
-    equipment: ["TV Screen", "Whiteboard"],
-    foodAllowed: false,
-  },
-];
+// const MOCK_ROOMS = [
+//   {
+//     id: "r1",
+//     name: "Bayou City Room",
+//     capacity: 12,
+//     equipment: ["Projector", "Whiteboard", "Conference Phone"],
+//     foodAllowed: true,
+//   },
+//   {
+//     id: "r2",
+//     name: "Cullen Room",
+//     capacity: 8,
+//     equipment: ["TV Screen", "Whiteboard"],
+//     foodAllowed: false,
+//   },
+// ];
 
-let MOCK_BOOKINGS = [];
+// let MOCK_BOOKINGS = [];
 
 // ---------- Rooms ----------
 
 async function getRooms() {
   // STAGE 1 (current):
-  return MOCK_ROOMS;
+ //  return MOCK_ROOMS;
 
   // STAGE 3: replace the line above with:
   // const response = await fetch("/api/rooms");
@@ -47,21 +47,25 @@ async function getRooms() {
 
 async function getRoomById(id) {
   // STAGE 1 (current):
-  return MOCK_ROOMS.find((room) => room.id === id);
+  // return MOCK_ROOMS.find((room) => room.id === id);
 
   // STAGE 3: replace the two lines above with:
-  // const response = await fetch(`/api/rooms/${id}`);
-  // return await response.json();
+  const response = await fetch(`/api/rooms/${id}`);
+  return await response.json();
 }
 
 // ---------- Bookings ----------
 
 async function getBookings() {
 
-  return MOCK_BOOKINGS;
+ // return MOCK_BOOKINGS;
   // TODO (Stage 1): return MOCK_BOOKINGS
   // TODO (Stage 3): fetch("/api/bookings") and return the parsed JSON
+
+  const response = await fetch("/api/bookings");
+  return await response.json();
 }
+
 
 async function createBooking(bookingData) {
   // bookingData looks like:
@@ -70,12 +74,12 @@ async function createBooking(bookingData) {
   // TODO (Stage 1): push a new object (with a generated id) into
   //   MOCK_BOOKINGS and return it.
 
-  const newBooking = {
-    id: `b${Date.now()}`,
-    ...bookingData,
-  };
-  MOCK_BOOKINGS.push(newBooking);
-  return newBooking;
+  // const newBooking = {
+  //   id: `b${Date.now()}`,
+  //   ...bookingData,
+  // };
+  // MOCK_BOOKINGS.push(newBooking);
+  // return newBooking;
 
 
   // TODO (Stage 3): fetch("/api/bookings", {
@@ -83,12 +87,21 @@ async function createBooking(bookingData) {
   //   headers: { "Content-Type": "application/json" },
   //   body: JSON.stringify(bookingData),
   // }) and return the parsed JSON.
+
+  const response = await fetch("/api/bookings", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(bookingData),
+  });
+  return await response.json();
 }
 
 async function deleteBooking(id) {
   // TODO (Stage 1): remove the matching booking from MOCK_BOOKINGS.
   // TODO (Stage 3): fetch(`/api/bookings/${id}`, { method: "DELETE" }).
-  async function deleteBooking(id) {
-    MOCK_BOOKINGS = MOCK_BOOKINGS.filter((booking) => booking.id !== id);
-  }
+  // async function deleteBooking(id) {
+  //   MOCK_BOOKINGS = MOCK_BOOKINGS.filter((booking) => booking.id !== id);
+  // }
+  const response = await fetch(`/api/bookings/${id}`, {method: "DELETE",});
+  return await response.json();
 }
