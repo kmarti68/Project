@@ -41,8 +41,8 @@ async function getRooms() {
  //  return MOCK_ROOMS;
 
   // STAGE 3: replace the line above with:
-  // const response = await fetch("/api/rooms");
-  // return await response.json();
+  const response = await fetch("/api/rooms");
+  return await response.json();
 }
 
 async function getRoomById(id) {
